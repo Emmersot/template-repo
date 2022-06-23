@@ -13,14 +13,33 @@ module.exports = {
     contentBase: './dist'      
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Shape Tracker',
+      title: 'Template Repo',
       template: './src/index.html',
       inject: 'body'
     })
   ],
   module: {
     rules: [
+      {
+        test: /\.(gif|png|avif|jpe?g)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/images/'
+            }
+          }
+        ]
+      },
+      {
+        test:/\.html$/,
+        use: [
+          'html-loader'
+        ]
+      },
       {
         test: /\.css$/,
         use: [
